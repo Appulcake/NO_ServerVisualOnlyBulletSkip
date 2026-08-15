@@ -9,7 +9,7 @@ namespace NO_SVOBS;
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class Plugin : BaseUnityPlugin
 {
-    internal new static ManualLogSource Logger { get; private set; } = null!;
+    private new static ManualLogSource Logger { get; set; } = null!;
     private Harmony? Harmony { get; set; }
     
     private void Awake()
@@ -18,6 +18,8 @@ public class Plugin : BaseUnityPlugin
         
         Harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
         Harmony.PatchAll();
+        
+        Logger.LogInfo($"{MyPluginInfo.PLUGIN_NAME} loaded!");
     }
     
     private void OnDestroy()
